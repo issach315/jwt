@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/consulting_db
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# JWT Configuration
+jwt:
+  secret: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2
+  # Choose ONE of these options:
+
+  # Option 1: For refresh token implementation
+  access-token-expiration: 900000      # 15 minutes (for access token)
+  refresh-token-expiration: 604800000  # 7 days (for refresh token)
+
+  # Option 2: Simple implementation (no refresh token)
+  # expiration: 86400000  # 24 hours
+
+  issuer: user-service
+  audience: consulting-app
+
+# Security Configuration
+security:
+  filter:
+    order: 10
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.consulting: INFO
+    org.springframework.security: INFO
+    org.springframework.web: INFO
